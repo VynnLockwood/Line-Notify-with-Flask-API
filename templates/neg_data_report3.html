@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Style to ensure the div fills the full height of the screen */
+        html, body, .container {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Style to make the div container scrollable if content overflows */
+        .container {
+            position: relative;
+            top: 773px;
+            overflow-x: auto;
+            overflow-y: auto;
+        }
+        
+        /* Style for the table */
+        table {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+
+        }
+        
+        /* Style for the data cells */
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd; /* Add a bottom border to separate rows */
+            font-size: 28px; /* Decrease font size */
+        }
+        
+        /* Set zoom size */
+        body {
+            width: 2880px;
+            height: 2319px;
+            background-color: #daead3;
+            
+             /* Adjust the percentage to set   zoom: 150%;   the desired zoom size */
+        }
+
+        .topbar{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 700px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <img src="https://i.postimg.cc/TP1gJwyz/logo-white-02.png" alt="ideatrade logo" width="25%" height="auto" srcset="">
+
+        <div>
+            <h2 style="font-size: 7rem;">Outstanding stocks <br> <span style="font-size: 5rem;">
+                ประจำวันที่ 
+                {% for date in report_date %}
+                    {{ date }}
+                    {% if loop.index == 1 %}
+                        ถึงวันที่
+                    {% endif %}
+                {% endfor %}
+            </span></h2>
+        </div>
+    </div>
+
+    <div class="container" id="data_report">
+        <table>
+            {% for j in range(0, max_rows, 10) %}
+            <tr>
+                {% for row in data3[j:j+10] %}
+                <td>{{ row|join(', ') }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
